@@ -4,17 +4,20 @@ param(
 )
 
 $ErrorActionPreference = "Stop"
+$adbCommand = Get-Command adb -ErrorAction SilentlyContinue
+$adb = if ($adbCommand) { $adbCommand.Source } else { "$env:LOCALAPPDATA\Android\Sdk\platform-tools\adb.exe" }
+if (-not (Test-Path $adb)) { throw "ADB was not found. Install Android SDK Platform-Tools or add adb to PATH." }
 
-& adb -s $PhoneSerial get-state | Out-Null
+& $adb -s $PhoneSerial get-state | Out-Null
 if ($LASTEXITCODE -ne 0) { throw "Phone is not available through ADB." }
-& adb -s $GlassesSerial get-state | Out-Null
+& $adb -s $GlassesSerial get-state | Out-Null
 if ($LASTEXITCODE -ne 0) { throw "Glasses are not available through ADB." }
 
 # Phone localhost:1235 -> laptop localhost:1235 (optional local VLM).
-& adb -s $PhoneSerial reverse tcp:1235 tcp:1235
+& $adb -s $PhoneSerial reverse tcp:1235 tcp:1235
 # Laptop localhost:8765 -> phone companion, then glasses localhost:8765 -> laptop.
-& adb -s $PhoneSerial forward tcp:8765 tcp:8765
-& adb -s $GlassesSerial reverse tcp:8765 tcp:8765
+& $adb -s $PhoneSerial forward tcp:8765 tcp:8765
+& $adb -s $GlassesSerial reverse tcp:8765 tcp:8765
 
 Write-Host "USB demo routing is ready."
 Write-Host "Phone model base URL: http://127.0.0.1:1235"
