@@ -1,0 +1,27 @@
+# Gradle / Android
+.gradle/
+.kotlin/
+**/build/
+local.properties
+*.apk
+*.aab
+
+# IDE / operating system
+.idea/
+*.iml
+.DS_Store
+
+# Python
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+
+# Runtime output
+logs/
+*.log
+
+# Local model weights
+models/
+*.gguf
+*.safetensors
