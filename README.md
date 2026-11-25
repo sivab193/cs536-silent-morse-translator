@@ -146,3 +146,14 @@ the default `~/models` location with `MORSE_MODEL_ROOT` and port 1235 with
 
 The deadline-ordered implementation, validation, and presentation plan is in
 [`docs/REMAINING_WORK.md`](docs/REMAINING_WORK.md).
+
+The complete data-flow explanation, Morse timing logic, test procedure, results
+plan, and five-minute classroom runbook are in
+[`docs/ARCHITECTURE_AND_DEMO.md`](docs/ARCHITECTURE_AND_DEMO.md).
+
+## Deterministic light test tool
+
+Open [`tools/morse-sender.html`](tools/morse-sender.html) in Chrome or Edge to
+transmit preset/custom messages, show the expected output and exact timeline,
+or download a synchronized WebM test video plus JSON ground truth. Play the
+video fullscreen while the glasses app is in Light mode.
